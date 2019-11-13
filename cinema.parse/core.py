@@ -7,7 +7,7 @@ import requests
 class CinemaParser:
     def __init__(self, city):
         '''
-        d
+        srart, create class
         '''
         self.city = city
 
