@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 import requests
 
 class CinemaParser:
-    def __init__(self, city):
+    def __init__(self, *city):
         '''
         srart, create class
         '''
@@ -18,8 +18,10 @@ class CinemaParser:
         '''
         if self.city == "msk":
             self.content = requests.get("https://msk.subscity.ru")
-        else:
+        elif self.city == "spb":
             self.content = requests.get("http://spb.subcity.ru")
+        else:
+            self.content = requests.get("https://msk.subscity.ru")
         self.content = self.content.content.decode("utf-8", errors='ignore')
         return self.content
 
@@ -44,7 +46,8 @@ class CinemaParser:
         print(films)
 
 
-a = CinemaParser("msk")
-a.extract_raw_content()
-a.print_raw_content()
+a = CinemaParser()
+#a.extract_raw_content()
+#a.print_raw_content()
 a.get_films_list()
+
