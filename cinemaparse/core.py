@@ -10,6 +10,7 @@ class CinemaParser:
         srart, create class
         '''
         self.city = city
+        self.content = ""
 
     def extract_raw_content(self):
         '''
@@ -17,7 +18,7 @@ class CinemaParser:
         '''
         if self.city == "msk":
             self.content = requests.get("https://msk.subscity.ru")
-        elif self.city == "spb":
+        else:
             self.content = requests.get("http://spb.subcity.ru")
         self.content = self.content.content.decode("utf-8", errors='ignore')
         return self.content
@@ -26,7 +27,7 @@ class CinemaParser:
         '''
         print html page
         '''
-        soup = BeautifulSoup(self.extract_raw_content())
+        soup = BeautifulSoup(CinemaParser.extract_raw_content(self))
         print(soup.prettify())
 
     def get_films_list(self):
@@ -34,7 +35,7 @@ class CinemaParser:
         get list of films
         '''
         films = []
-        soup = BeautifulSoup(self.extract_raw_content())
+        soup = BeautifulSoup(CinemaParser.extract_raw_content(self))
         span = soup.select(".movie-plates")
         for i in span:
             h = soup.select(".movie-plate")
