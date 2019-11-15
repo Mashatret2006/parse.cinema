@@ -9,6 +9,10 @@ class CinemaParser:
         '''
         srart, create class
         '''
+        if city == () or city == ('msk',):
+            city = "msk"
+        elif city == ('spb',):
+            city = "spb"
         self.city = city
         self.content = ""
 
@@ -20,8 +24,6 @@ class CinemaParser:
             self.content = requests.get("https://msk.subscity.ru")
         elif self.city == "spb":
             self.content = requests.get("http://spb.subcity.ru")
-        else:
-            self.content = requests.get("https://msk.subscity.ru")
         self.content = self.content.content.decode("utf-8", errors='ignore')
         return self.content
 
@@ -49,5 +51,6 @@ class CinemaParser:
 a = CinemaParser()
 #a.extract_raw_content()
 #a.print_raw_content()
-a.get_films_list()
+#a.get_films_list()
+print(a.city)
 
